@@ -3,6 +3,7 @@ from flask_cors import CORS
 from flask import request
 import requests
 
+
 app = Flask(__name__)
 url = "https://findwork.dev/api/jobs/"
 CORS(app)
@@ -17,7 +18,35 @@ def get_job(type):
     get_job_url = url + "?search=" + type
     headers = {'Authorization': 'Token 9fe56153c850546257b47713c1cb9810ce7d441b'}
     response = requests.request("GET", get_job_url, headers=headers, data=payload)
-    return response.json()
+    results = []
+    responseDict = response.json()
 
+    if "results" in responseDict:
+        results = responseDict["results"]
+    if "next" in responseDict:
+        next_url = responseDict["next"]
+        results = results + get_next_page(next_url)
+    returnResults = {}
+    returnResults["results"] = results
+    print(len(results))
+    print(results)
+
+    return returnResults
+
+def get_next_page(get_job_url):
+    payload={}
+    headers = {'Authorization': 'Token 9fe56153c850546257b47713c1cb9810ce7d441b'}
+    response = requests.request("GET", get_job_url, headers=headers, data=payload)
+    results = []
+    responseDict = response.json()
+    print(get_job_url)
+    if "results" in responseDict:
+        results = responseDict["results"]
+    if "next" in responseDict:
+        next_url = responseDict["next"]
+        if next_url is not None:
+            results = results + get_next_page(next_url)
+    return results
+    
 if __name__ == '__main__':
     app.run()

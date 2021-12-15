@@ -6,7 +6,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 from scipy import spatial
 
 import re
-class Wordcount:
+class KeywordCounter:
     def __init__(self) -> None:
         self.sc = SparkContext('local')
 

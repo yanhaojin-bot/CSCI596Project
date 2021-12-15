@@ -2,7 +2,7 @@ from flask import Flask
 from flask_cors import CORS
 from flask import request
 import requests
-import wordcount
+import sparkUtil
 import json
 import heapq
 from flask.json import jsonify
@@ -30,7 +30,7 @@ def get_job(type):
     results = get_page(get_job_url)
 
     # send each job information to the spark util 
-    wc = wordcount.Wordcount()
+    wc = sparkUtil.KeywordCounter()
     scores = []
     for i in range(len(results)):
         score = wc.extract_keywords(json.dumps(results[i]), given_scores)

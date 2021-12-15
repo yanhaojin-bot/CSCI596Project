@@ -25,9 +25,17 @@ Spark is built on top of the Scale programming language but we can use the Pytho
 
 
 ## Usage
-- In this example, we want to find the ios related job and the skills and weight coefficients we provide are swift - 4, android - 2, objective-c -3. Note: a skill with a larger coefficient means that skill has more weight in the process of the recommendation.
+- In this example, we want to find the ios related job and the skills and weight coefficients we provide are swift : 4, android : 2, objective-c : 3. Note: a skill with a larger coefficient means that skill has more weight in the process of the recommendation.
 
-- We send a POST request to http://20.114.29.101:5000/get_jobs/ios with a json body:
+- Start the flask program by following commands on the terminal:
+
+```
+cd CSCI596Project
+export FLASK_APP=app.py
+flask run -h 0.0.0.0
+```
+
+- We send a POST request to http://localhost:5000/get_jobs/ios with a json body: (Note: The server is deployed on 20.114.29.101)
 ```
 {
     "skills": {

@@ -2,7 +2,8 @@ from flask import Flask
 from flask_cors import CORS
 from flask import request
 import requests
-
+import wordcount
+import json
 
 app = Flask(__name__)
 url = "https://findwork.dev/api/jobs/"
@@ -29,7 +30,16 @@ def get_job(type):
     returnResults = {}
     returnResults["results"] = results
     print(len(results))
-    print(results)
+    wc = wordcount.Wordcount()
+    scores = []
+    given_scores = {
+        "swift" : 4,
+        "android" : 2,
+        "objectivec" : 3
+    }
+    for result in results:
+        score = wc.extract_keywords(json.dumps(result), given_scores)
+        scores.append(score)
 
     return returnResults
 

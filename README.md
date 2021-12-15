@@ -53,6 +53,11 @@ flask run -h 0.0.0.0
 
 ![SparkDiagram](/img/result.png)
 
+## Environment
 
+- Ubuntu 18.04
+- Python 3.6.9
+- Spark 3.2
+- Flask 0.12.2
 
 [1] https://www.bls.gov/ooh/computer-and-information-technology/software-developers.htm
